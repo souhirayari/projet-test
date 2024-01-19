@@ -1,13 +1,15 @@
 
-import {createBrowserRouter,RouterProvider,} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import HomePages from './pages/HomePage';
 import AddAdmin from "./pages/AddAdmin";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <HomePages/>
+      element: <HomePages />
     },
     {
       path: "/add",
@@ -16,7 +18,10 @@ function App() {
   ]);
   return (
     <>
-          <RouterProvider router={router} />
+
+      <ToastContainer position="top-center"
+        reverseOrder={true} />
+      <RouterProvider router={router} />
 
     </>
   )

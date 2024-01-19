@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Add.css";
+import { toast } from "react-toastify";
 
 export default function AddCourses() {
     const [courses, setCourses] = useState([]);
@@ -44,7 +45,9 @@ export default function AddCourses() {
     const handleAddCourse = async () => {
         try {
             if (!title || !price || !image) {
-                console.error("Veuillez remplir tous les champs.");
+                console.error("please complete all fields");
+                toast.error("please complete all fields")
+
                 return;
             }
     
@@ -63,6 +66,7 @@ export default function AddCourses() {
             if (response.ok) {
                 setLoading(true);
                 setShowPopup(false);
+                toast.success("courses added successfully ");
             } else {
                 console.error("Failed to add course");
             }
@@ -79,6 +83,8 @@ export default function AddCourses() {
 
             if (response.ok) {
                 setLoading(true);
+                toast.success("course delete successfully" )
+                
             } else {
                 console.error("Failed to delete course");
             }
@@ -106,7 +112,8 @@ const handleUpdateCourse = async () => {
     try {
         // Vérifier si les champs ne sont pas vides
         if (!updateData.title || !updateData.price || !updateData.image) {
-            console.error("Veuillez remplir tous les champs.");
+            console.error("please complete all fields");
+            toast.error("please complete all fields")
             return;
         }
 
@@ -122,6 +129,7 @@ const handleUpdateCourse = async () => {
             if (response.ok) {
                 setLoading(true);
                 setShowUpdatePopup(false);
+                toast.success("courses update successfully ");
             } else {
                 console.error("Failed to update course");
             }
@@ -162,7 +170,7 @@ const handleUpdateCourse = async () => {
                             <td><a onClick={() => handleUpdateClick(index)}>update</a></td>
                             <td>{course.title}</td>
                             <td>{course.price}</td>
-                            <td>{course.image}</td>
+                            <td><img src={course.image} alt="image" /></td>
 
                         </tr>
                     )) : <>loading ...</>}
